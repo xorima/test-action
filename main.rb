@@ -50,7 +50,9 @@ header = {'Content-Type': 'text/json'}
 # Create the HTTP objects
 http = Net::HTTP.new(uri.host, uri.port)
 request = Net::HTTP::Post.new(uri.request_uri, header)
-request.body = event['repository']['owner'].to_json
+request.body = event.to_json
 
 # Send the request
-response = http.request(request)
+if ENV['SEND']
+  response = http.request(request)
+end
