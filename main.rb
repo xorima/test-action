@@ -30,7 +30,8 @@ is_merged = pull_request.merged?
 puts(is_merged)
 
 unless is_merged
-  abort(' We only process merged repositories ')
+  puts(' We only process merged repositories ')
+  exit 0
 end
 
 puts(' Processing ')
