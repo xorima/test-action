@@ -13,7 +13,9 @@ raise 'Set the GITHUB_TOKEN env variable' unless github_token
 client = Octokit::Client.new(:access_token => github_token)
 
 # Get the event that is passed in
+puts(ENV['GITHUB_EVENT_PATH'])
 file = File.open(ENV['GITHUB_EVENT_PATH'])
+puts(file)
 event = JSON.load(file)
 file.close
 
