@@ -16,7 +16,7 @@ client = Octokit::Client.new(:access_token => github_token)
 puts(ENV['GITHUB_EVENT_PATH'])
 file = File.open(ENV['GITHUB_EVENT_PATH'])
 puts(file.read)
-event = JSON.load(file)
+event = JSON.parse(file.read)
 file.close
 
 pr_number = event['number']
