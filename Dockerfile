@@ -5,4 +5,4 @@ WORKDIR /app
 
 RUN bundle install
 
-ENTRYPOINT ["ruby", "main.rb"]
+ENTRYPOINT ["ls -la" "&&" "ruby", "main.rb"]
