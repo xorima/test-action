@@ -4,5 +4,7 @@ COPY . /app
 WORKDIR /app
 
 RUN bundle install
+RUN ls
+RUN ls /app
 
-ENTRYPOINT ["ls -la" "&&" "ruby", "main.rb"]
+ENTRYPOINT ["ruby", "main.rb"]
