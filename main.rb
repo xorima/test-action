@@ -15,7 +15,6 @@ client = Octokit::Client.new(:access_token => github_token)
 # Get the event that is passed in
 file = File.open(ENV['GITHUB_EVENT_PATH'])
 event = JSON.load(file)
-file.close
 
 pr_number = event['number']
 repo_name = event['repository']['name']
@@ -29,10 +28,10 @@ is_merged = pull_request.merged?
 
 puts(is_merged)
 
-unless is_merged
-  puts(' We only process merged repositories ')
-  exit 0
-end
+# unless is_merged
+#   puts(' We only process merged repositories ')
+#   exit 0
+# end
 
 puts(' Processing ')
 
