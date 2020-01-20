@@ -53,8 +53,9 @@ http = Net::HTTP.new(uri.host, uri.port)
 puts('req')
 request = Net::HTTP::Post.new(uri.request_uri, header)
 puts('body')
+puts(event)
 request.body = event.to_json
-
+puts('send')
 # Send the request
 if ENV['SEND']
   puts('sending')
