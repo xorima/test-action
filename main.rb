@@ -40,19 +40,24 @@ unless pull_request.labels.detect { |l| l[:name] == 'release'}
   abort (' No labels found ')
 end
 
-puts ('releasing')
+puts('releasing')
 endpoint = ENV['ENDPOINT_URI']
-
+puts(endpoint)
 uri = URI.parse(endpoint)
 
 header = {'Content-Type': 'text/json'}
 
 # Create the HTTP objects
+puts('http')
 http = Net::HTTP.new(uri.host, uri.port)
+puts('req')
 request = Net::HTTP::Post.new(uri.request_uri, header)
+puts('body')
 request.body = event.to_json
 
 # Send the request
 if ENV['SEND']
+  puts('sending')
   response = http.request(request)
 end
+puts('end')
