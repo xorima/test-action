@@ -15,10 +15,17 @@ client = Octokit::Client.new(:access_token => github_token)
 # Get the event that is passed in
 puts(ENV['GITHUB_EVENT_PATH'])
 file = File.open(ENV['GITHUB_EVENT_PATH'])
-puts(file.read)
-event = JSON.parse(file.read)
-file.close
+#puts(file.read)
+begin
+  event = JSON.parse(file.read)
+rescue SyntaxError, NameError => boom
+  print "String doesn't compile: " + boom
+rescue Exception => bang
+  print "Error running script: " + bang
+  exit!(false)
+end
 
+file.close
 pr_number = event['number']
 repo_name = event['repository']['name']
 owner = event['repository']['owner']['login']
