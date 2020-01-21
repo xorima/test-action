@@ -6,6 +6,7 @@ require 'uri'
 # 3rd party
 require 'octokit'
 
+begin
 # We must have the github token to interact with the API and read the labels
 github_token = ENV['GITHUB_TOKEN']
 raise 'Set the GITHUB_TOKEN env variable' unless github_token
@@ -17,15 +18,8 @@ puts(ENV['GITHUB_EVENT_PATH'])
 file = File.open(ENV['GITHUB_EVENT_PATH'])
 #puts(file.read)
 puts('parsing json')
-begin
-  event = JSON.parse(file.read)
-  puts(event)
-rescue SyntaxError, NameError => boom
-  print "String doesn't compile: " + boom
-rescue Exception => bang
-  print "Error running script: " + bang
-  exit!(false)
-end
+
+event = JSON.parse(file.read)
 puts('json parsed')
 
 file.close
@@ -88,3 +82,10 @@ if ENV['SEND']
   response = http.request(request)
 end
 puts('end')
+rescue StandardError => bang
+  puts("Error running script: #{bang}")
+rescue SyntaxError, NameError => boom
+  puts("String doesn't compile:#{boom} ")
+rescue Exception => bang
+  puts("Error running script: #{bang}")
+end
