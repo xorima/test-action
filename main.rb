@@ -54,21 +54,9 @@ uri = URI.parse(endpoint)
 header = {'Content-Type': 'text/json'}
 
 # Create the HTTP objects
-puts('http')
 http = Net::HTTP.new(uri.host, uri.port)
-puts('req')
-begin
   request = Net::HTTP::Post.new(uri.request_uri, header)
-rescue SyntaxError, NameError => boom
-  puts("String doesn't compile: #{boom}")
-  exit!(false)
-rescue StandardError => bang
-  puts("Error running script: #{bang}")
-  exit!(false)
-rescue Exception => bang
-  puts("Error running script: #{bang}")
-  exit!(false)
-end
+
 puts('REQ FINISHED')
 
 
@@ -77,10 +65,8 @@ puts(event)
 request.body = event.to_json
 puts('send')
 # Send the request
-if ENV['SEND']
-  puts('sending')
-  response = http.request(request)
-end
+puts('sending')
+response = http.request(request)
 puts('end')
 rescue StandardError => bang
   puts("Error running script: #{bang}")
