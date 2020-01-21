@@ -63,7 +63,17 @@ header = {'Content-Type': 'text/json'}
 puts('http')
 http = Net::HTTP.new(uri.host, uri.port)
 puts('req')
-request = Net::HTTP::Post.new(uri.request_uri, header)
+begin
+  request = Net::HTTP::Post.new(uri.request_uri, header)
+rescue SyntaxError, NameError => boom
+  print "String doesn't compile: " + boom
+rescue Exception => bang
+  print "Error running script: " + bang
+  exit!(false)
+end
+puts('REQ FINISHED')
+
+
 puts('body')
 puts(event)
 request.body = event.to_json
