@@ -66,12 +66,13 @@ puts('req')
 begin
   request = Net::HTTP::Post.new(uri.request_uri, header)
 rescue SyntaxError, NameError => boom
-  print "String doesn't compile: " + boom
+  puts("String doesn't compile: #{boom}")
+  exit!(false)
 rescue StandardError => bang
-  print "Error running script: " + bang
+  puts("Error running script: #{bang}")
   exit!(false)
 rescue Exception => bang
-  print "Error running script: " + bang
+  puts("Error running script: #{bang}")
   exit!(false)
 end
 puts('REQ FINISHED')
