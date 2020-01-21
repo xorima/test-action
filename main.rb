@@ -16,14 +16,17 @@ client = Octokit::Client.new(:access_token => github_token)
 puts(ENV['GITHUB_EVENT_PATH'])
 file = File.open(ENV['GITHUB_EVENT_PATH'])
 #puts(file.read)
+puts('parsing json')
 begin
   event = JSON.parse(file.read)
+  puts(event)
 rescue SyntaxError, NameError => boom
   print "String doesn't compile: " + boom
 rescue Exception => bang
   print "Error running script: " + bang
   exit!(false)
 end
+puts('json parsed')
 
 file.close
 pr_number = event['number']
