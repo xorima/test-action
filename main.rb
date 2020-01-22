@@ -12,7 +12,6 @@ logging_level = ENV['Logging_level'] || 'Warn'
 logger = Logger.new(STDOUT)
 logger.level = logging_level
 
-begin
 # We must have the github token to interact with the API and read the labels
 github_token = ENV['GITHUB_TOKEN']
 raise 'Set the GITHUB_TOKEN env variable' unless github_token
@@ -42,10 +41,10 @@ pull_request = client.pull_request(repository_full_name, pr_number)
 logger.info ('Checking if pull request is merged')
 is_merged = pull_request.merged?
 
-unless is_merged
-  logger.warn('Only merged pull requests are processed, exiting')
-  exit 0
-end
+# unless is_merged
+#   logger.warn('Only merged pull requests are processed, exiting')
+#   exit 0
+# end
 
 logger.info('Repository has been merged, processing event')
 
