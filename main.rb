@@ -55,6 +55,13 @@ unless pull_request.labels.detect { |l| l[:name] == 'release'}
   exit 0
 end
 
+payload_to_send = {
+  pr_number: pr_number,
+  repo_name: repo_name,
+  owner: owner,
+  labels_found: labels,
+  }
+  
 endpoint_uri = ENV['ENDPOINT_URI']
 logger.info("Sending event to #{endpoint_uri}")
 uri = URI.parse(endpoint_uri)
@@ -66,7 +73,7 @@ logger.debug('Creating the http object')
 http = Net::HTTP.new(uri.host, uri.port)
 logger.info('Creating http request object')
 request = Net::HTTP::Post.new(uri.request_uri, header)
-request.body = event.to_json
+request.body = payload_to_send.to_json
 logger.info('Sending the request')
 response = http.request(request)
 logger.info("request sent, status code is #{response.code}")
