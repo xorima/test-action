@@ -59,7 +59,7 @@ payload_to_send = {
   pr_number: pr_number,
   repo_name: repo_name,
   owner: owner,
-  labels_found: labels,
+  labels_found: pull_request.labels,
   }
   
 endpoint_uri = ENV['ENDPOINT_URI']
