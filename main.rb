@@ -41,10 +41,10 @@ pull_request = client.pull_request(repository_full_name, pr_number)
 logger.info ('Checking if pull request is merged')
 is_merged = pull_request.merged?
 
-# unless is_merged
-#   logger.warn('Only merged pull requests are processed, exiting')
-#   exit 0
-# end
+unless is_merged
+  logger.warn('Only merged pull requests are processed, exiting')
+  exit 0
+end
 
 logger.info('Repository has been merged, processing event')
 
@@ -59,7 +59,6 @@ payload_to_send = {
   pr_number: pr_number,
   repo_name: repo_name,
   owner: owner,
-  labels_found: pull_request.labels,
   }
   
 endpoint_uri = ENV['ENDPOINT_URI']
