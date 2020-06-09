@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-source "https://rubygems.org"
+source 'https://rubygems.org'
 
-git_source(:github) {|repo_name| "https://github.com/#{repo_name}" }
-
-gem 'octokit'
-
-group :test do
-
-end
+# gem 'octokit'
 
 group :dev do
-  gem 'bundle'
+  gem 'bundler'
 end
+
+# source "https://rubygems.pkg.github.com/damacus" do
+#   gem "aws-lambda-check-env"
+#   gem "aws-lambda-messaging"
+#   gem "github-schema-validator"
+# end

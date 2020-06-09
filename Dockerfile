@@ -1,6 +1,7 @@
 FROM ruby:2.7
 
-COPY . /app
+COPY main.rb /app/main.rb
+COPY lib /app/lib
 WORKDIR /app
 
 RUN bundle install
