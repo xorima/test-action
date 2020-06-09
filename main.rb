@@ -23,12 +23,16 @@ def event_json
   event = JSON.parse(file.read)
   file.close
 
-  @logger.info('Event has been parsed as json')
-  @logger.debug(event)
+  puts "DEBUG"
+  puts event
+  puts "DEBUG"
+
+  # @logger.info('Event has been parsed as json')
+  # @logger.debug(event)
   event
 end
 
-@logger = logger
+# @logger = logger
 # client = github_client
 
 # Get information about the repository
@@ -54,6 +58,6 @@ payload = event_json
 send_payload(payload)
 
 unless pull_request.labels.detect { |l| l[:name] == 'release' }
-  @logger.warn('Only pull requests with the release label are processed, exiting')
+  # @logger.warn('Only pull requests with the release label are processed, exiting')
   exit 0
 end
