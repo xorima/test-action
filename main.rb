@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'json'
 require 'logger'
 require 'net/http'
@@ -8,8 +10,8 @@ require_relative 'lib/payload'
 
 def logger
   logging_level = ENV['Logging_level'] || 'Debug'
-  logger = Logger.new(STDOUT)
-  logger.level = logging_level
+  @logger = Logger.new(STDOUT)
+  @logger.level = logging_level
 end
 
 # def github_client
@@ -23,16 +25,12 @@ def event_json
   event = JSON.parse(file.read)
   file.close
 
-  puts "DEBUG"
-  puts event.to_json
-  puts "DEBUG"
-
-  # @logger.info('Event has been parsed as json')
-  # @logger.debug(event)
-  event
+  @logger.info('DEBUG')
+  @logger.info(event.to_json)
+  @logger.info('DEBUG')
+  event.to_json
 end
 
-# @logger = logger
 # client = github_client
 
 # Get information about the repository
