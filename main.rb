@@ -24,7 +24,7 @@ def event_json
   file.close
 
   puts "DEBUG"
-  puts event
+  puts event.to_json
   puts "DEBUG"
 
   # @logger.info('Event has been parsed as json')
