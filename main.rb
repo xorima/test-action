@@ -31,6 +31,8 @@ def event_json
   event.to_json
 end
 
+logger
+
 # client = github_client
 
 # Get information about the repository
