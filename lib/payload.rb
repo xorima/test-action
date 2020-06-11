@@ -1,6 +1,6 @@
 
 def send_payload(payload)
-  endpoint_uri = ENV['ENDPOINT_URI']
+  endpoint_uri = ENV['GATEWAY_URL']
   # logger.info("Sending event to #{endpoint_uri}")
   uri = URI.parse(endpoint_uri)
   http = Net::HTTP.new(uri.host, uri.port)
