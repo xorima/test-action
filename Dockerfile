@@ -1,6 +1,8 @@
-FROM ruby:2.5
+FROM ruby:2.7
 
-COPY . /app
+COPY main.rb /app/main.rb
+COPY lib /app/lib
+COPY Gemfile /app/Gemfile
 WORKDIR /app
 
 RUN bundle install
